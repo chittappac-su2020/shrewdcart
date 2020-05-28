@@ -17,7 +17,6 @@ config
 controllers
 middlewares
 models
-...
 ```
 
 # Usage (run fullstack app on your machine)
