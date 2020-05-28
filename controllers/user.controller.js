@@ -175,7 +175,22 @@ exports.findOneEmail = (req,res) => {
 exports.update = (req,res) => {
     const id = req.params.id;
 
-    User.update(req.body, {
+    if(!schema.validate(req.body.password)){
+        res.status(500).send({message:"Your password must have min of 8 characters,one uppercase, one lowercase, have digits, not have spaces and not predictable "+req.body.password});
+        return;
+    }
+
+    const user = {
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        email:req.body.email,
+        password:req.body.password
+    }
+
+    const hash = bcrypt.hashSync(user.password,10);
+    user.password = hash;
+
+    User.update(user, {
         where : {id : id}
     })
         .then(num => {
