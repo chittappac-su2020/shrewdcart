@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var request = require('supertest');
-var app = require('../server');
+var app = require('../app');
 
 it('POST request sanity test', function(done) {
   request(app)
