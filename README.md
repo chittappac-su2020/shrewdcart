@@ -60,3 +60,5 @@ mysql: ^2.18.1,
 mysql2: ^2.1.0,
 password-validator: ^5.0.3,
 sequelize: ^5.21.10
+
+New changes
