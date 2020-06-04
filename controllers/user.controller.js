@@ -20,7 +20,7 @@ schema
 
 
 //Register
-exports.register = (req,res) => {
+exports.register = (req,res) => {   
     
     const userData = {
         firstname: req.body.firstname,
@@ -158,7 +158,7 @@ exports.findOneEmail = (req,res) => {
 
     User.findOne({
         where:{
-            email:{[Op.like]: `%${email}%`}
+            email:email
         }
         })
         .then(data => {
@@ -231,3 +231,4 @@ exports.profile = (req,res) => {
             res.status(500).send('error: '+err)
         })
 }
+
