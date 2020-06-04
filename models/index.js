@@ -6,6 +6,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   dialect: dbConfig.dialect,
   operatorsAliases: false,
 
+  define:{
+    timestamps: true
+  },
+
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -20,5 +24,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require("./user.model.js")(sequelize, Sequelize);
+db.books = require("./book.model.js")(sequelize, Sequelize);
+db.author = require("./authors.model")(sequelize, Sequelize);
+db.cart = require("./cart.model")(sequelize, Sequelize);
 
 module.exports = db;
