@@ -8,7 +8,7 @@ $ git clone git@github.com:chittappac-su2020/webapp.git
 $ npm i
 ```
 
-## project structure
+## project structuree
 ```terminal
 .circleci
 api
