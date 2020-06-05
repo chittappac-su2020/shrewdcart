@@ -28,4 +28,10 @@ db.books = require("./book.model.js")(sequelize, Sequelize);
 db.author = require("./authors.model")(sequelize, Sequelize);
 db.cart = require("./cart.model")(sequelize, Sequelize);
 
+// db.books.hasMany(db.author, { as: "authors"});
+// db.author.belongsTo(db.books, {
+//   foreignKey : "bookid",
+//   as : "book"
+// });
+
 module.exports = db;

@@ -17,3 +17,18 @@ exports.insertauthor = (req,res) => {
                     res.status(500).send('error: '+err)
                 })
 };
+
+//Find all authors
+exports.findAllAuthors = (req,res) => {
+
+    Author.findAll()
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message : err.message
+        })
+    })
+
+}

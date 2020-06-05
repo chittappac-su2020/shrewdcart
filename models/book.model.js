@@ -20,9 +20,9 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.DOUBLE,
           allowNull: false
       },
-      sellername: {
+      sellername : {
           type: Sequelize.STRING,
-          allowNull:false
+          allowNull: false
       }
     },{
         timestamps: true,

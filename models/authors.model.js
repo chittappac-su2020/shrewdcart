@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
       authorname: {
         type: Sequelize.STRING,
         allowNull: false
-      }
+      },
     },{
         timestamps: false,
         underscored: true
