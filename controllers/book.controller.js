@@ -81,7 +81,6 @@ exports.findOBooks = (req,res) => {
                 message: "Error retrieving books with sellername"
             });
         });
-
 }
 
 //Updating a book by the seller
@@ -116,7 +115,6 @@ exports.updateBooks = (req,res) => {
                 message: "Error updating Book with sellername=" + book.id
             });
         });
-
 }
 
 //Delete a book with id
@@ -145,5 +143,24 @@ exports.deleteBook = (req,res) => {
     });
 
 }
+
+//Find a book by isbn
+exports.findByIsbn = (req,res) => {
+    Book.findOne({
+        where: {
+            ISBN: req.body.isbn
+        }
+    })
+    .then(book => {
+        res.send(book);
+    })
+    .catch(err => {
+        res.status(500).send('error: '+err);
+    })
+}
+
+
+
+
 
 

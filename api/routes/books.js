@@ -23,4 +23,7 @@ router.post('/delete',books.deleteBook);
 //Find all books
 router.post('/findall',books.findAllBooks);
 
+//findbyisbn
+router.post('/isbn',books.findByIsbn)
+
 module.exports = router;
