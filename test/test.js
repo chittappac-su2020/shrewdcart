@@ -10,7 +10,7 @@ it('POST request sanity test', function(done) {
         "firstName": "Chandrakanth",
         "lastName": "Chittappa",
         "password": "Chandu2019",
-        "email": "chittappa.c@husky.neu.edu"
+        "username": "chittappa.c@husky.neu.edu"
       }
     )
     .expect(function(res) {
