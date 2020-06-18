@@ -8,7 +8,8 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-// Save User to Database
+// Save User to Database 
+// This command is to create a row in the database
 User.create({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
