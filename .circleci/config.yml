@@ -2,14 +2,14 @@ version: 2
 jobs:
   pr_check:
     docker:
-      - image: circleci/node:10.16.2
+      - image: circleci/node:14.3.0
     steps:
       - checkout
       - run: npm install
       - run: npm test
   build:
     docker:
-      - image: circleci/node:10.16.2
+      - image: circleci/node:14.3.0
     steps:
       - checkout
       - run: npm install
