@@ -14,7 +14,11 @@ router.post('/findall',carts.findAllCarts);
 //Find existing
 router.post('/findone',carts.findExisting);
 
-router.post('/update',carts.updateCart)
+//Updating cart
+router.post('/update',carts.updateCart);
+
+//Deleting cart
+router.post('/delete',carts.deleteCart);
 
 module.exports = router;
 
