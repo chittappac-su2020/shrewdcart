@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const request = require("request");
 
 const cardRoutes = require('./api/routes/cards');
 const userRoutes = require('./api/routes/users');
@@ -10,6 +11,7 @@ const authRoutes = require('./api/routes/auth');
 const bookRoutes = require('./api/routes/books');
 const authorRoutes = require('./api/routes/author');
 const cartRoutes = require('./api/routes/cart');
+const imageRoutes = require('./api/routes/image');
 
 const db = require("./models");
 
@@ -32,6 +34,7 @@ app.use('/auth',authRoutes);
 app.use('/books',bookRoutes);
 app.use('/author',authorRoutes)
 app.use('/cart',cartRoutes)
+app.use('/image',imageRoutes);
 
 //Handling all other requests
 app.use((req, res, next) => {
@@ -49,5 +52,6 @@ app.use((error, req, res, next) => {
     });
 });
 
-module.exports = app;
 
+
+module.exports = app;

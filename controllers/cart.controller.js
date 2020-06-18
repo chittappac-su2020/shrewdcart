@@ -97,3 +97,24 @@ exports.updateCart = (req,res) => {
         });
 
 }
+
+//Delete Cart
+exports.deleteCart = (req,res) => {
+
+    const title = req.body.title;
+
+    Cart.destroy({
+        where : {title : title}
+    })
+    .then(num => {
+        res.send({
+            message : "Cart was deleted successfully!"
+        });
+    })
+    .catch(err => {
+        res.status(500).send({
+            message : "Could not delete Book with title= "+title
+        });
+    });
+
+}
