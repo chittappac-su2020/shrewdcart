@@ -19,7 +19,7 @@ it('POST request sanity test', function(done) {
         throw Error('unexpected status code: ' + res.statusCode);
       }
     })
-    .expect('Content-Type', /json/)
+    .expect('Content-Type', json)
     .end(function(err, res) {
           if (err) console.log(err);
        });
