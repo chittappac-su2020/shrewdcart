@@ -14,4 +14,6 @@ router.post('/delete',img.deleteImage);
 
 router.post('/find',img.findAllImages);
 
+router.post('/deletefroms3',img.deleteFromS3);
+
 module.exports = router;
