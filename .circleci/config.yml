@@ -2,19 +2,27 @@ version: 2
 jobs:
   pr_check:
     docker:
-      - image: circleci/node:14.3.0
+      - image: circleci/node:10.16.3
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
+      - run:
+          name: Install npm command
+          command: 'npm install'
+      - run:
+          name: Starting node
+          command: 'npm test'
   build:
     docker:
-      - image: circleci/node:14.3.0
+      - image: circleci/node:10.16.3
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
-   deploy:
+      - run:
+          name: Installing NPM
+          command: 'npm install'
+      - run:
+          name: Starting node test
+          command: 'npm test'
+  deploy:
     docker:
       - image: circleci/python:2.7-jessie
     steps:
@@ -44,8 +52,7 @@ jobs:
           name: AWS CodeDeploy call
           command: |
             aws deploy register-application-revision --application-name webapp --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip
-            aws deploy create-deployment --application-name webapp --deployment-group-name webapp-deployment --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce
-
+            aws deploy create-deployment --application-name webapp --deployment-group-name codedeploygroup --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce 
 workflows:
   version: 2
   pr-check:
@@ -57,5 +64,3 @@ workflows:
         filters:
           branches:
             only: master
-
-
