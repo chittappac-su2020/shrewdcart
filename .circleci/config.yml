@@ -52,7 +52,7 @@ jobs:
           name: AWS CodeDeploy call
           command: |
             aws deploy register-application-revision --application-name csye6225-webapp --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip
-            aws deploy create-deployment --application-name csye6225-webapp --deployment-group-name codedeploygroup --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce 
+            aws deploy create-deployment --application-name csye6225-webapp --deployment-group-name csye6225-webapp-deployment --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce 
 workflows:
   version: 2
   pr-check:
