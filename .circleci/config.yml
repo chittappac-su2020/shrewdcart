@@ -47,12 +47,12 @@ jobs:
       - run:
           name: Upload Artifact to S3 bucket
           command: |
-            aws s3 cp webapp_zip/webapp.zip s3://${S3_BUCKET_ADDR}/artifacts/webapp.zip
+            aws s3 cp webapp_zip/webapp.zip s3://${S3_BUCKET_NAME}/artifacts/webapp.zip
       - run:
           name: AWS CodeDeploy call
           command: |
-            aws deploy register-application-revision --application-name webapp --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip
-            aws deploy create-deployment --application-name webapp --deployment-group-name codedeploygroup --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce 
+            aws deploy register-application-revision --application-name csye6225-webapp --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip
+            aws deploy create-deployment --application-name csye6225-webapp --deployment-group-name codedeploygroup --s3-location bucket=${S3_BUCKET_NAME},bundleType=zip,key=artifacts/webapp.zip --deployment-config-name CodeDeployDefault.AllAtOnce 
 workflows:
   version: 2
   pr-check:
@@ -60,7 +60,5 @@ workflows:
     - pr_check
   build_deploy:
     jobs:
-    - build:
-        filters:
-          branches:
-            only: master
+    - build
+    - deploy
