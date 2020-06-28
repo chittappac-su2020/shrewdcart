@@ -1,5 +1,8 @@
 const db = require("../models");
 const Image = db.image;
+var aws = require("aws-sdk");
+const S3_BUCKET = process.env.bucket;
+
 
 //Create Image
 exports.insertimage = (req,res) => {
@@ -11,6 +14,7 @@ exports.insertimage = (req,res) => {
 
     Image.create(data)
                 .then(image => {
+                    console.log("mychack "+ image)
                     res.json( { image:image } )
                 })
                 .catch(err => {
@@ -20,7 +24,6 @@ exports.insertimage = (req,res) => {
 
 //Delete image
 exports.deleteImage = (req,res) => {
-
     const id = req.body.id;
 
     Image.destroy({
@@ -44,6 +47,32 @@ exports.deleteImage = (req,res) => {
     });
 
 }
+
+//Delete image from amazon s3
+exports.deleteFromS3 = (req,res) => {
+    var s3 = new aws.S3({
+      accessKeyId:process.env.AWSAccessKeyId,
+      secretAccessKey: process.env.AWSSecretKey,
+      region : 'us-east-1',
+      signatureVersion:"v4"
+    });
+      var params = {  Bucket: S3_BUCKET, Key: req.body.imagename };
+      
+
+      s3.deleteObject(params, function(err, data) {
+        if (err) console.log(err, err.stack);  // error
+        else{
+        Image.destroy({where : {title : req.body.imagename}})
+        .then((data)=>{
+          res.status(200);
+          res.json({
+            msg:" image deleted Successfully"
+          })
+        })
+        }                  // deleted
+      });
+}
+
 
 exports.findImages = (req,res) => {
 

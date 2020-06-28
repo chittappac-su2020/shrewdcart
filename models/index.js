@@ -1,3 +1,5 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const dbConfig = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
@@ -35,8 +37,6 @@ if (process.env.APPLICATION_ENV === 'prod') {
     }
   });
 }
-
-
 
 const db = {};
 
