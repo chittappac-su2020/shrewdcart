@@ -1,4 +1,4 @@
-//This is the test file
+
 var expect = require('chai').expect;
 var request = require('supertest');
 var app = require('../app');
