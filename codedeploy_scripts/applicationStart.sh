@@ -10,7 +10,7 @@ sudo npm install pm2 -g -f
 npm start
 echo "Backend started"
 pm2 list
-cd client
+cd front
 echo "Inside the client directory"
 sudo npm install pm2 --save
 echo "Starting the react app"
