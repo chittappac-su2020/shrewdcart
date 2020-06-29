@@ -11,4 +11,3 @@ cat userdata.txt ipadd.txt > .env
 cat .env
 npm install --save nodemon
 npm install --save bcrypt
-npm start
