@@ -10,3 +10,6 @@ cat ipadd.txt
 cat userdata.txt ipadd.txt > .env
 echo "creating the .dot env file"
 cat .env
+echo "Installing node latest version"
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - 
+sudo apt-get install -y nodejs
