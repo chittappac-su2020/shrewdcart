@@ -8,6 +8,5 @@ sudo chmod 757 userdata.txt
 cat userdata.txt
 cat ipadd.txt
 cat userdata.txt ipadd.txt > .env
+echo "creating the .dot env file"
 cat .env
-npm install --save nodemon
-npm install --save bcrypt
