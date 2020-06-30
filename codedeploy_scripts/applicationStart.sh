@@ -7,6 +7,7 @@ echo "IP address value"
 echo $IP_ADDRESS
 echo "Installing pm2 for the backend"
 sudo npm install pm2 -g -f
+ip=`cat ipaddress.txt`
 sudo sed -i -e "s|ipaddress|$ip|g" app.js
 pm2 start server.js -f --name "server" 
 echo "Backend started"
