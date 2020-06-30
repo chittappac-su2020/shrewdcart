@@ -18,7 +18,7 @@ const imageRoutes = require('./api/routes/image');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://"+ipaddress+":3000"
+    origin: "http://ipaddress:3000"
 };
 
 app.use(cors(corsOptions));
