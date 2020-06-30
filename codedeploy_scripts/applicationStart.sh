@@ -10,10 +10,9 @@ sudo npm install pm2 -g -f
 npm start
 echo "Backend started"
 pm2 list
-cd front
+cd front/
 echo "Inside the client directory"
-sudo npm install pm2 --save
 echo "Starting the react app"
-REACT_APP_IP_ADDRESS=$IP_ADDRESS pm2 start node_modules/react-scripts/scripts/start.js --name "client"
+REACT_APP_IP_ADDRESS=$IP_ADDRESS npm run start
 pm2 list
 echo "End"
