@@ -34,6 +34,8 @@ jobs:
             aws configure set default.region us-east-1
             touch ipadd.txt
             sudo echo IP_ADDRESS=${IP_ADDRESS} >> ipadd.txt
+            touch ipaddress.txt
+            sudo echo ${IP_ADDRESS} >> ipaddress.txt
             mkdir -p webapp_zip
             zip -r webapp-${CIRCLE_BUILD_NUM}.zip ./
             mv webapp-${CIRCLE_BUILD_NUM}.zip webapp_zip/
