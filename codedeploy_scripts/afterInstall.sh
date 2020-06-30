@@ -1,7 +1,7 @@
 cd /home/ubuntu
 cd /
 sudo chmod 757 userdata.txt
-sudo mv userdata.txt /home/ubuntu
+sudo cp userdata.txt /home/ubuntu
 cd home/ubuntu
 sudo chmod 757 ipadd.txt
 sudo chmod 757 userdata.txt
