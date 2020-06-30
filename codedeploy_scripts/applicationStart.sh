@@ -12,3 +12,4 @@ echo "Backend started"
 pm2 list
 cd front/
 echo "Inside the client directory"
+REACT_APP_IP_ADDRESS=$IP_ADDRESS pm2 start node_modules/react-scripts/scripts/start.js
