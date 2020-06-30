@@ -1,6 +1,4 @@
 cd /home/ubuntu
-sudo rm  /var/lib/apt/lists/lock
-killall lock-front
 cd /
 sudo chmod 757 userdata.txt
 sudo cp userdata.txt /home/ubuntu
