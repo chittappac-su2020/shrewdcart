@@ -114,7 +114,7 @@ class Seller extends Component {
     }
 
     validate = (e) => {
-        const ipaddress = process.env.REACT_APP_IP_ADDRESS;
+        //const ipaddress = process.env.REACT_APP_IP_ADDRESS;
         const price = parseFloat(document.getElementById("price").value);
         const quantity = parseInt(document.getElementById("quantity").value);
         console.log("This is the quantity of the book");
@@ -240,7 +240,7 @@ class Seller extends Component {
     }
 
     uploadImage = (e) => {
-        const ipaddress = process.env.REACT_APP_IP_ADDRESS;
+        //const ipaddress = process.env.REACT_APP_IP_ADDRESS;
         const id = e.target.id;
         const isbnData = {};
         isbnData.isbn = document.getElementById("cisbn"+id).value;

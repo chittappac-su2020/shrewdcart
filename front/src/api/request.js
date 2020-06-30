@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ipaddress = process.env.REACT_APP_IP_ADDRESS;
+//const ipaddress = process.env.REACT_APP_IP_ADDRESS;
 
 export async function register(user) {
 
