@@ -21,4 +21,4 @@ cd ../
 cd componets
 sudo sed -i -e "s|ipaddress|$ip|g" Seller.js
 cd ../../
-REACT_APP_IP_ADDRESS=$IP_ADDRESS pm2 start node_modules/react-scripts/scripts/start.js --name "front"
+REACT_APP_IP_ADDRESS=$IP_ADDRESS pm2 start node_modules/react-scripts/scripts/start.js --name "front" 
