@@ -14,5 +14,7 @@ source .env
 echo "Value of IP ADDRESS"
 echo $IP_ADDRESS
 echo "Installing node latest version"
+sudo rm  /var/lib/apt/lists/lock
+killall lock-frontend
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
