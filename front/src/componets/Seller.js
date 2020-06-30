@@ -179,7 +179,7 @@ class Seller extends Component {
                         let fileName = fileParts[0];
                         let fileType = fileParts[1];
                         console.log("Preparing the upload");
-                        ax.post("http://"+ipaddress+":5000/image/sign_s3",{
+                        ax.post("http://ipaddress:5000/image/sign_s3",{
                         fileName : fileName,
                         fileType : fileType
                         })
@@ -277,7 +277,7 @@ class Seller extends Component {
                 let fileName = fileParts[0];
                 let fileType = fileParts[1];
                 console.log("Preparing the upload");
-                ax.post("http://"+ipaddress+":5000/image/sign_s3",{
+                ax.post("http://ipaddress:5000/image/sign_s3",{
                 fileName : fileName,
                 fileType : fileType
                 })
