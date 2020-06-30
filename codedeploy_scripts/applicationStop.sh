@@ -1,3 +1,4 @@
+cd home/ubuntu
 ls -al
 pm2 stop server
 pm2 stop front
