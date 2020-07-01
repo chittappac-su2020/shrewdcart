@@ -8,12 +8,12 @@ files:
 hooks:
   ApplcationStop:
     - location: ./codedeploy_scripts/applicationStop.sh
-      timeout: 300
+      timeout: 1200
 
   AfterInstall:
     - location: ./codedeploy_scripts/afterInstall.sh
-      timeout: 300
+      timeout: 1200
 
   ApplicationStart:
     - location: ./codedeploy_scripts/applicationStart.sh
-      timeout: 300 
+      timeout: 1200 

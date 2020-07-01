@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const request = require("request");
 
-const ipaddress = process.env.IP_ADDRESS;
+//const ipaddress = process.env.IP_ADDRESS;
 
 const cardRoutes = require('./api/routes/cards');
 const userRoutes = require('./api/routes/users');
@@ -18,7 +18,7 @@ const imageRoutes = require('./api/routes/image');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://"+ipaddress+":3000"
+    origin: "http://ipaddress:3000"
 };
 
 app.use(cors(corsOptions));
