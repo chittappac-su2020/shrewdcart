@@ -19,7 +19,7 @@ middlewares
 models
 ```
 
-# Usage (run fullstack app on your machine)
+# Usage (run fullstack app on your machine).
 
 ## Local machine set up
 - [MongoDB](https://gist.github.com/nrollr/9f523ae17ecdbb50311980503409aeb3)
