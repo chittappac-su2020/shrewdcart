@@ -19,7 +19,7 @@ middlewares
 models
 ```
 
-# Usage (run fullstack app on your machine).
+# Usage (run fullstack app on your machine)
 
 ## Local machine set up
 - [MongoDB](https://gist.github.com/nrollr/9f523ae17ecdbb50311980503409aeb3)
@@ -58,5 +58,5 @@ jsonwebtoken: ^8.5.1,
 morgan: ^1.10.0,
 mysql: ^2.18.1,
 mysql2: ^2.1.0,
-password-validator: ^5.0.3,
+password-validator: ^5.0.3
 sequelize: ^5.21.1
