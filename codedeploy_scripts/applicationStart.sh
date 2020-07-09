@@ -1,5 +1,9 @@
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/home/ubuntu/cloudwatch-config.json -s
 cd /home/ubuntu
+pm2 stop server
+pm2 stop front
+sudo pm2 stop server
+sudo pm2 stop front
 npm install --save nodemon
 npm install --save bcrypt
 npm install
