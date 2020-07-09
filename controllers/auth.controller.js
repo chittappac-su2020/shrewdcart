@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
 // This command is to create a row in the database
 
 //Metrics on API usage
-sdc.counter("endpoint.signuppage.http.post");
+sdc.increment("endpoint.signuppage.http.post");
 
 User.create({
     email: req.body.email,
@@ -34,7 +34,7 @@ User.create({
         }
         }).then(() => {
             res.status(400).send({ message: "User exists! Please try Sign in"});
-            logger.error("User already exusts");
+            logger.error("User already exists");
         });
     } else {
         logger.info("Trying to create a new user");

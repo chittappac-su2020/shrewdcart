@@ -25,7 +25,7 @@ schema
 //Register
 exports.register = (req,res) => {   
     
-    sdc.counter("endpoint.userregister.http.post");
+    sdc.increment("endpoint.userregister.http.post");
 
     const userData = {
         firstname: req.body.firstname,
@@ -75,7 +75,7 @@ exports.register = (req,res) => {
 //Login
 exports.login = (req,res) => {
 
-    sdc.counter("endpoint.userlogin.http.get");
+    sdc.increment("endpoint.userlogin.http.get");
 
     User.findOne({
         where: {
@@ -106,7 +106,7 @@ exports.login = (req,res) => {
 exports.create = (req,res) => {
     
     //Validate request
-    sdc.counter("endpoint.createuser.http.post");
+    sdc.increment("endpoint.createuser.http.post");
 
     if (!req.body.firstname && !req.body.lastname && !req.body.email && !req.body.password) {
         res.status(400).send({
@@ -140,7 +140,7 @@ exports.create = (req,res) => {
 //Retrieve all users from the database
 exports.findAll = (req,res) => {
 
-    sdc.counter("endpoint.findallusers.http.post");
+    sdc.increment("endpoint.findallusers.http.post");
 
     const firstname = req.query.title;
     var condition = firstname ? { title: {[Op.like]: `%${title}%`}} : null;
@@ -160,7 +160,7 @@ exports.findAll = (req,res) => {
 //Find a single User with an id
 exports.findOne = (req,res) => {
 
-    sdc.counter("endpoint.findoneuser.http.post");
+    sdc.increment("endpoint.findoneuser.http.post");
 
     const id = req.params.id;
 

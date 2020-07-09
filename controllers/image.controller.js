@@ -10,7 +10,7 @@ const sdc=new statsDClient({ host: 'localhost', port: 8125});
 //Create Image
 exports.insertimage = (req,res) => {
 
-    sdc.counter("endpoint.insertimage.http.post");
+    sdc.increment("endpoint.insertimage.http.post");
 
     const data = {
         title: req.body.title,
@@ -33,7 +33,7 @@ exports.insertimage = (req,res) => {
 //Delete image
 exports.deleteImage = (req,res) => {
 
-    sdc.counter("endpoint.deleteimage.http.get");
+    sdc.increment("endpoint.deleteimage.http.get");
 
     const id = req.body.id;
 
@@ -64,7 +64,7 @@ exports.deleteImage = (req,res) => {
 //Delete image from amazon s3
 exports.deleteFromS3 = (req,res) => {
 
-    sdc.counter("endpoint.deletefroms3.http.get");
+    sdc.increment("endpoint.deletefroms3.http.get");
 
     var s3 = new aws.S3({
       accessKeyId:process.env.AWSAccessKeyId,
@@ -92,7 +92,7 @@ exports.deleteFromS3 = (req,res) => {
 
 exports.findImages = (req,res) => {
 
-    sdc.counter("endpoint.findimages.http.post");
+    sdc.increment("endpoint.findimages.http.post");
 
     const bookid = req.body.bookid;
 
@@ -115,7 +115,7 @@ exports.findImages = (req,res) => {
 
 exports.findAllImages = (req,res) => {
 
-    sdc.counter("endpoint.finallimages.http.post");
+    sdc.increment("endpoint.finallimages.http.post");
 
     Image.findAll()
     .then(data => {
