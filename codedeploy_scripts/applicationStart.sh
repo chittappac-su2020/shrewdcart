@@ -4,6 +4,16 @@ pm2 stop server
 pm2 stop front
 sudo pm2 stop server
 sudo pm2 stop front
+pm2 startup
+sudo env PATH=$PATH:/usr/local/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
+sudo mkdir -p /etc/systemd/system/pm2-ubuntu.service.d
+sudo touch /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
+sudo echo "[Service]" >> /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
+sudo echo "Restart=always" >> /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
+sudo echo "RestartSec=3" >> /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
+sudo systemctl daemon-reload
+pm2 save 
+sudo systemctl status pm2-ubuntu
 npm install --save nodemon
 npm install --save bcrypt
 npm install
