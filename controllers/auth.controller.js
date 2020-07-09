@@ -17,7 +17,7 @@ var timer = new Date();
 
 //Metrics on API usage
 sdc.increment("endpoint.signuppage.http.post");
-sdc.timing("POST signup time "+timer);
+sdc.timing("POST signup time ",timer);
 
 User.create({
     email: req.body.email,
@@ -37,14 +37,14 @@ User.create({
         }).then(() => {
             res.status(400).send({ message: "User exists! Please try Sign in"});
             logger.error("User already exists");
-            sdc.timing("QUERY find all users query timming "+timer);
+            sdc.timing("QUERY find all users query timming ",timer);
         });
     } else {
         logger.info("Trying to create a new user");
         User.create(user)
         .then(data => {
             res.send(data);
-            sdc.timing("QUERY create user timming "+timer);
+            sdc.timing("QUERY create user timming ",timer);
         })
         .catch(err => {
             res.status(500).send({

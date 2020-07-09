@@ -2,19 +2,19 @@ version: 2
 jobs:
   pr_check:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:14.5.0
     steps:
       - checkout
       - run: npm install
       - run: npm test
   build:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:14.5.0
     steps:
       - checkout
       - run: npm install
       - run: npm test
-  deploy:
+  deploy: 
     docker:
       - image: circleci/python:2.7-jessie
     steps:
@@ -41,7 +41,7 @@ jobs:
             mv webapp-${CIRCLE_BUILD_NUM}.zip webapp_zip/
             
       - run:
-          name: Uploading artifact to S3 bucket
+          name: Uploading artifact to S3 bucket 
           command: |
             aws s3 cp webapp_zip/webapp-${CIRCLE_BUILD_NUM}.zip s3://${S3_BUCKET_NAME} 
       - run:

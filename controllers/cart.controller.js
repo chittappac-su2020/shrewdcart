@@ -16,7 +16,7 @@ exports.insertcart = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.cartinsert.http.post");
-    sdc.timing("POST insert cart request timming "+timer);
+    sdc.timing("POST insert cart request timming ",timer);
 
     const cartData = {
         title: req.body.title,
@@ -31,7 +31,7 @@ exports.insertcart = (req,res) => {
                 .then(book => {
                     res.json( { book:book } )
                     logger.info("Successfully inserted data to the cart");
-                    sdc.timing("QUERY insert cart request timming "+timer);
+                    sdc.timing("QUERY insert cart request timming ",timer);
                 })
                 .catch(err => {
                     res.status(500).send('error: '+err)
@@ -44,13 +44,13 @@ exports.findAllCarts = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.findallcarts.http.get");
-    sdc.timing("GET find all the items in the cart request timming "+timer);
+    sdc.timing("GET find all the items in the cart request timming ",timer);
 
     Cart.findAll()
     .then(data => {
         res.send(data);
         logger.info("Successfully retrieved all the items in the cart with cart data "+data);
-        sdc.timing("QUERY find all the items in the cart request timming "+timer);
+        sdc.timing("QUERY find all the items in the cart request timming ",timer);
     })
     .catch(err => {
         res.status(500).send({
@@ -65,7 +65,7 @@ exports.findExisting = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.finditemcart.http.post");
-    sdc.timing("GET checking if the item is present in the cart request timming "+timer);
+    sdc.timing("GET checking if the item is present in the cart request timming ",timer);
 
     const title = req.body.title;
 
@@ -78,7 +78,7 @@ exports.findExisting = (req,res) => {
             if(user) {
                 res.status(200).send(user);
                 logger.info("Successfully retrieved the searched item from the cart with cart data "+user);
-                sdc.timing("QUERY checking if the item is present in the cart request timming "+timer);
+                sdc.timing("QUERY checking if the item is present in the cart request timming ",timer);
             }else{
                 res.status(500).send("Item does not exist")
                 logger.error("Error in retrieving the searched item from the cart");
@@ -94,7 +94,7 @@ exports.updateCart = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.updatecart.http.post");
-    sdc.timing("PUT update cart request timming "+timer);
+    sdc.timing("PUT update cart request timming ",timer);
 
     const cart = {
         title:req.body.title,
@@ -114,7 +114,7 @@ exports.updateCart = (req,res) => {
                     message: "Cart was updated successfully."
                 });
                 logger.info("Updated the cart successfully!");
-                sdc.timing("QUERY update cart request timming "+timer);
+                sdc.timing("QUERY update cart request timming ",timer);
             } else {
                 res.send({
                     message: `Cannot update Cart with id=${cart.bookid}. Maybe Book was not found or req.body is empty`
@@ -135,7 +135,7 @@ exports.deleteCart = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.deletecart.http.post");
-    sdc.timing("POST delete cart request timming "+timer);
+    sdc.timing("POST delete cart request timming ",timer);
 
     const title = req.body.title;
 
@@ -147,7 +147,7 @@ exports.deleteCart = (req,res) => {
             message : "Cart was deleted successfully!"
         });
         logger.info("Cart was deleted successfully!");
-        sdc.timing("QUERY delete cart request timming "+timer);
+        sdc.timing("QUERY delete cart request timming ",timer);
     })
     .catch(err => {
         res.status(500).send({

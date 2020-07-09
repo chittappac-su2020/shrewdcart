@@ -12,7 +12,7 @@ exports.insertauthor = (req,res) => {
 
     //metric for API usage
     sdc.increment("endpoint.authorinsert.http.post");
-    sdc.timing("GET author creation time "+timer);
+    sdc.timing("GET author creation time ",timer);
 
     const authorData = {
         bookid:req.body.bookid,
@@ -22,7 +22,7 @@ exports.insertauthor = (req,res) => {
     Author.create(authorData)
                 .then(author => {
                     res.json( { author:author } )
-                    sdc.timing("QUERY create author timming "+timer);
+                    sdc.timing("QUERY create author timming ",timer);
                 })
                 .catch(err => {
                     res.status(500).send('error: '+err)
@@ -35,12 +35,12 @@ exports.findAllAuthors = (req,res) => {
     var timmer = new Date();
 
     sdc.increment("endpoint.authorfindall.http.post");
-    sdc.timing("POST find authors timing "+timmer)
+    sdc.timing("POST find authors timing ",timmer)
 
     Author.findAll()
     .then(data => {
         res.send(data);
-        sdc.timing("QUERY find all authors timming "+timmer);
+        sdc.timing("QUERY find all authors timming ",timmer);
     })
     .catch(err => {
         res.status(500).send({

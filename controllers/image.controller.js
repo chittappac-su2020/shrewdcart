@@ -12,7 +12,7 @@ exports.insertimage = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.insertimage.http.post");
-    sdc.timing("POST insert image request timming "+timer);
+    sdc.timing("POST insert image request timming ",timer);
 
     const data = {
         title: req.body.title,
@@ -25,7 +25,7 @@ exports.insertimage = (req,res) => {
                     console.log("mychack "+ image)
                     res.json( { image:image } )
                     logger.info("Image was created successfully");
-                    sdc.timing("QUERY insert image request timming "+timer);
+                    sdc.timing("QUERY insert image request timming ",timer);
                 })
                 .catch(err => {
                     res.status(500).send('error: '+err);
@@ -38,7 +38,7 @@ exports.deleteImage = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.deleteimage.http.get");
-    sdc.timing("POST delete image request timming "+timer);
+    sdc.timing("POST delete image request timming ",timer);
 
     const id = req.body.id;
 
@@ -51,7 +51,7 @@ exports.deleteImage = (req,res) => {
                 message : "Book was deleted successfully!"
             });
             logger.info("Image was deleted successfully");
-            sdc.timing("QUERY delete image request timming "+timer);
+            sdc.timing("QUERY delete image request timming ",timer);
         }else{
             res.status(500).send({
                 message : `Cannot delete Book with id=${id}. Maybe book was not found`
@@ -72,7 +72,7 @@ exports.deleteFromS3 = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.deletefroms3.http.get");
-    sdc.timing("POST delete from s3 request timming "+timer);
+    sdc.timing("POST delete from s3 request timming ",timer);
 
     var s3 = new aws.S3({
       accessKeyId:process.env.AWSAccessKeyId,
@@ -93,7 +93,7 @@ exports.deleteFromS3 = (req,res) => {
             msg:" image deleted Successfully"
           })
           logger.info("Deleted the image successfully");
-          sdc.timing("QUERY delete from s3 request timming "+timer);
+          sdc.timing("QUERY delete from s3 request timming ",timer);
         })
         }                  // deleted
       });
@@ -103,7 +103,7 @@ exports.findImages = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.findimages.http.post");
-    sdc.timing("GET find images request timming "+timer);
+    sdc.timing("GET find images request timming ",timer);
 
     const bookid = req.body.bookid;
 
@@ -115,7 +115,7 @@ exports.findImages = (req,res) => {
         .then(data => {
             res.send(data);
             logger.info("Found the image successfully with the image data "+data);
-            sdc.timing("QUERY find images request timming "+timer);
+            sdc.timing("QUERY find images request timming ",timer);
         })
         .catch(err => {
             res.status(500).send({
@@ -129,13 +129,13 @@ exports.findAllImages = (req,res) => {
 
     var timer = new Date();
     sdc.increment("endpoint.finallimages.http.post");
-    sdc.timing("Find all images request timing "+timer);
+    sdc.timing("Find all images request timing ",timer);
 
     Image.findAll()
     .then(data => {
         res.send(data);
         logger.info("Retrieved the images successfully with images data "+data);
-        sdc.timing("QUERY find images request timming "+timer);
+        sdc.timing("QUERY find images request timming ",timer);
     })
     .catch(err => {
         logger.error("Error in retrieving the images");
