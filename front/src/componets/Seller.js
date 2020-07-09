@@ -91,6 +91,8 @@ class Seller extends Component {
 
         axios.findAllBooks().then((res) => {
 
+
+
             if(res.status === 200){
                 console.log(res.data)
                 this.setState({allbooks : res.data});
@@ -358,22 +360,21 @@ class Seller extends Component {
                 console.log(imagedata);
                 axios.delImageFromS3(imagedata).then((res)=>{
                     console.log(res);
+                    axios.deleteBook(id).then((res) => {
+
+                        if(res.status === 200){
+                            alert(res.data.message)
+                        }else{
+                            alert(res.data.message)
+                        }
+
+                        axios.deleteCart(cart).then((res) => {
+                            console.log(res.data);
+                        })
+            
+                    })
                 })
             });
-
-            axios.deleteBook(id).then((res) => {
-
-                if(res.status === 200){
-                    alert(res.data.message)
-                }else{
-                    alert(res.data.message)
-                }
-    
-            })
-            axios.deleteCart(cart).then((res) => {
-                console.log(res.data);
-            })
-
         }
 
         window.location.reload(true);
