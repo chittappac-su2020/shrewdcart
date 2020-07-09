@@ -32,7 +32,7 @@ exports.insertauthor = (req,res) => {
 
 //Find all authors
 exports.findAllAuthors = (req,res) => {
-    var timmer = new timmer();
+    var timmer = new Date();
 
     sdc.increment("endpoint.authorfindall.http.post");
     sdc.timing("POST find authors timing "+timmer)

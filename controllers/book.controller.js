@@ -91,7 +91,7 @@ exports.findOBooks = (req,res) => {
 
     var time=new Date();
     sdc.increment("endpoint.findothersellerbooks.http.get");
-    sdc.timing("GET retrieve all books timming "+timing);
+    sdc.timing("GET retrieve all books timming "+time);
 
     const email = req.body.email;
     console.log(email);
