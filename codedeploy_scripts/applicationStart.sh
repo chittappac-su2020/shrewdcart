@@ -5,7 +5,7 @@ pm2 stop front
 sudo pm2 stop server
 sudo pm2 stop front
 pm2 startup
-sudo env PATH=$PATH:/usr/local/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
 sudo mkdir -p /etc/systemd/system/pm2-ubuntu.service.d
 sudo touch /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
 sudo echo "[Service]" >> /etc/systemd/system/pm2-ubuntu.service.d/10_auto_restart_pm2.conf
