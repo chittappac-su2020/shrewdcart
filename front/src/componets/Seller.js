@@ -91,6 +91,8 @@ class Seller extends Component {
 
         axios.findAllBooks().then((res) => {
 
+            
+
             if(res.status === 200){
                 console.log(res.data)
                 this.setState({allbooks : res.data});
@@ -373,10 +375,7 @@ class Seller extends Component {
             axios.deleteCart(cart).then((res) => {
                 console.log(res.data);
             })
-
         }
-
-        window.location.reload(true);
     }
 
     showImages = (e) => {

@@ -4,6 +4,8 @@ pm2 stop server
 pm2 stop front
 sudo pm2 stop server
 sudo pm2 stop front
+npm install -g Unitech/pm2#development
+pm2 update
 pm2 startup
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
 sudo mkdir -p /etc/systemd/system/pm2-ubuntu.service.d
