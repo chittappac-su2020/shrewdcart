@@ -94,6 +94,7 @@ exports.findOBooks = (req,res) => {
     sdc.timing("GET retrieve all books timming "+timing);
 
     const email = req.body.email;
+    console.log(email);
 
     Book.findAll({
         where:{
