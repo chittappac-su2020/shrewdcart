@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 var passwordValidator = require('password-validator');
+const logger = require("../config/winston-logger");
+const statsDClient = require('statsd-client');
+const sdc=new statsDClient({ host: 'localhost', port: 8125});
 
 var schema = new passwordValidator();
 
@@ -22,6 +25,8 @@ schema
 //Register
 exports.register = (req,res) => {   
     
+    sdc.counter("endpoint.userregister.http.post");
+
     const userData = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -49,13 +54,16 @@ exports.register = (req,res) => {
                 .then(user => {
                     let token = jwt.sign(user.dataValues, config.secret ,{expiresIn: 1440});
                     res.json( { token:token } )
+                    logger.info("Created the User successfully");
                 })
                 .catch(err => {
-                    res.send('error: '+err)
+                    res.send('error: '+err);
+                    logger.error("Error in registering the user");
                 })
 
         } else {
             res.json({ error : "User already exists"});
+            logger.error("User already exists");
         }
     })
     .catch(err => {
@@ -66,6 +74,8 @@ exports.register = (req,res) => {
 
 //Login
 exports.login = (req,res) => {
+
+    sdc.counter("endpoint.userlogin.http.get");
 
     User.findOne({
         where: {
@@ -78,20 +88,26 @@ exports.login = (req,res) => {
 
                 let token = jwt.sign(user.dataValues, config.secret , {expiresIn : 1440})
                 res.json({ token: token})
+                logger.info("User logged in successfully");
 
             } else {
                 res.status(401).send({message : "Incorrect password"})
+                logger.error("Incorrect password");
             }
         })
         .catch(err => {
             res.status(404).send({message : "User does not exist"})
+            logger.error("User does not exist");
         })
 }
 
 
 //Create and save a new User
 exports.create = (req,res) => {
+    
     //Validate request
+    sdc.counter("endpoint.createuser.http.post");
+
     if (!req.body.firstname && !req.body.lastname && !req.body.email && !req.body.password) {
         res.status(400).send({
             message: "Content cannot be empty!"
@@ -111,6 +127,7 @@ exports.create = (req,res) => {
     User.create(user)
         .then(data => {
             res.send(data);
+
         })
         .catch(err => {
             res.status(500).send({
@@ -122,6 +139,9 @@ exports.create = (req,res) => {
 
 //Retrieve all users from the database
 exports.findAll = (req,res) => {
+
+    sdc.counter("endpoint.findallusers.http.post");
+
     const firstname = req.query.title;
     var condition = firstname ? { title: {[Op.like]: `%${title}%`}} : null;
 
@@ -139,6 +159,9 @@ exports.findAll = (req,res) => {
 
 //Find a single User with an id
 exports.findOne = (req,res) => {
+
+    sdc.counter("endpoint.findoneuser.http.post");
+
     const id = req.params.id;
 
     User.findByPk(id)
@@ -225,6 +248,7 @@ exports.profile = (req,res) => {
                 res.status(200).send(user)
             }else{
                 res.status(500).send("User does not exist")
+                logger.error("User does not exist when searching for the respective profile");
             }
         })
         .catch(err => {

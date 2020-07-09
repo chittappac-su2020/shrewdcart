@@ -1,4 +1,7 @@
 var aws = require('aws-sdk'); 
+const logger = require('../config/winston-logger');
+const statsDClient = require('statsd-client');
+const sdc=new statsDClient({ host: 'localhost', port: 8125});
 require('dotenv').config(); // Configure dotenv to load in the .env file
 // Configure aws with your accessKeyId and your secretAccessKey
 aws.config.update({
@@ -32,8 +35,10 @@ s3.getSignedUrl('putObject', s3Params, (err, data) => {
 
     if(err){
       console.log(err);
+      logger.error("Error in uploading the picture to the bucket with the error msg "+err);
       res.json({success: false, error: err})
     }else{
+      logger.info("Successfully uploaded the picture to the bucket");
       res.json({success:true, data:{returnData}});
     }
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
@@ -43,6 +48,9 @@ s3.getSignedUrl('putObject', s3Params, (err, data) => {
 }
 
 exports.downloadFile= (req,res)=>{
+
+        sdc.increment("endpoint.downloadimagefile.http.post");
+
         let s3_filename= req.body.image   
         const s3Client = new aws.S3({
         accessKeyId:process.env.AWSAccessKeyId,

@@ -1,11 +1,17 @@
 const db = require("../models");
 const Image = db.image;
 var aws = require("aws-sdk");
+const logger = require("../config/winston-logger");
 const S3_BUCKET = process.env.bucket;
+const statsDClient = require('statsd-client');
+const sdc=new statsDClient({ host: 'localhost', port: 8125});
 
 
 //Create Image
 exports.insertimage = (req,res) => {
+
+    sdc.counter("endpoint.insertimage.http.post");
+
     const data = {
         title: req.body.title,
         bookid: req.body.bookid,
@@ -16,14 +22,19 @@ exports.insertimage = (req,res) => {
                 .then(image => {
                     console.log("mychack "+ image)
                     res.json( { image:image } )
+                    logger.info("Image was created successfully");
                 })
                 .catch(err => {
-                    res.status(500).send('error: '+err)
+                    res.status(500).send('error: '+err);
+                    logger.error("Error in creating the image");
                 })
 };
 
 //Delete image
 exports.deleteImage = (req,res) => {
+
+    sdc.counter("endpoint.deleteimage.http.get");
+
     const id = req.body.id;
 
     Image.destroy({
@@ -34,10 +45,12 @@ exports.deleteImage = (req,res) => {
             res.send({
                 message : "Book was deleted successfully!"
             });
+            logger.info("Image was deleted successfully");
         }else{
             res.status(500).send({
                 message : `Cannot delete Book with id=${id}. Maybe book was not found`
             })
+            logger.error("Errror in deleting the Image");
         }
     })
     .catch(err => {
@@ -50,6 +63,9 @@ exports.deleteImage = (req,res) => {
 
 //Delete image from amazon s3
 exports.deleteFromS3 = (req,res) => {
+
+    sdc.counter("endpoint.deletefroms3.http.get");
+
     var s3 = new aws.S3({
       accessKeyId:process.env.AWSAccessKeyId,
       secretAccessKey: process.env.AWSSecretKey,
@@ -68,13 +84,15 @@ exports.deleteFromS3 = (req,res) => {
           res.json({
             msg:" image deleted Successfully"
           })
+          logger.info("Deleted the image successfully");
         })
         }                  // deleted
       });
 }
 
-
 exports.findImages = (req,res) => {
+
+    sdc.counter("endpoint.findimages.http.post");
 
     const bookid = req.body.bookid;
 
@@ -85,21 +103,27 @@ exports.findImages = (req,res) => {
         })
         .then(data => {
             res.send(data);
+            logger.info("Found the image successfully with the image data "+data);
         })
         .catch(err => {
             res.status(500).send({
                 message: "Error retrieving books with sellername"
             });
+            logger.error("Error in retrieving the books with sellername");
         });
 }
 
 exports.findAllImages = (req,res) => {
 
+    sdc.counter("endpoint.finallimages.http.post");
+
     Image.findAll()
     .then(data => {
         res.send(data);
+        logger.info("Retrieved the images successfully with images data "+data);
     })
     .catch(err => {
+        logger.error("Error in retrieving the images");
         res.status(500).send({
             message : err.message
         })

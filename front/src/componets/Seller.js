@@ -334,28 +334,20 @@ class Seller extends Component {
         const id = {id : document.getElementById("cid"+bookno).value };
         const cart = {title : document.getElementById("ctitle"+bookno).value};
 
-        //Newly added code
-        console.log("all images");
-        console.log(this.state.allimages);
-        console.log(id.id);
+        if(window.confirm("Do you confirm to delete?")){
 
-        const images = this.state.allimages.filter((i) => {
-            return i.bookid === parseInt(id.id);    
-        });
+            console.log("all images");
+            console.log(this.state.allimages);
+            console.log(id.id);
 
-        console.log("Images linked to the book");
-        console.log(images);
+            const images = this.state.allimages.filter((i) => {
+                return i.bookid === parseInt(id.id);    
+            });
 
-        if(images.length === 1){
-            const imagedata = {
-            }
-            imagedata.imagename = images[0].title;
-            console.log("Logging the image data");
-            console.log(imagedata);
-            axios.delImageFromS3(imagedata).then((res)=>{
-                console.log(res);
-            })
-        }else{
+            console.log("Images linked to the book");
+            console.log(images);
+
+        
             images.map((i) => {
                 const imagedata = {
                 }
@@ -366,10 +358,6 @@ class Seller extends Component {
                     console.log(res);
                 })
             });
-        }
-        //Newly added code
-
-        if(window.confirm("Do you confirm to delete?")){
 
             axios.deleteBook(id).then((res) => {
 
