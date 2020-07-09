@@ -40,6 +40,10 @@ s3.getSignedUrl('putObject', s3Params, (err, data) => {
     }else{
       logger.info("Successfully uploaded the picture to the bucket");
       res.json({success:true, data:{returnData}});
+      var timer = new Date();
+      sdc.increment("endpoint.uploadpicturetos3.http.post");
+      sdc.timing("QUERY upload picture request timming "+timer);
+      sdc.timing("REQUEST upload picture request timming "+timer);
     }
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
 
@@ -49,7 +53,10 @@ s3.getSignedUrl('putObject', s3Params, (err, data) => {
 
 exports.downloadFile= (req,res)=>{
 
+        var timer = new Date();
         sdc.increment("endpoint.downloadimagefile.http.post");
+        sdc.timing("GET download image request timming "+timer);
+        sdc.timing("QUERY download image request timming "+timer);
 
         let s3_filename= req.body.image   
         const s3Client = new aws.S3({

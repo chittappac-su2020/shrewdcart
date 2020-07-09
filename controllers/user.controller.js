@@ -25,7 +25,9 @@ schema
 //Register
 exports.register = (req,res) => {   
     
+    var timer = new Date();
     sdc.increment("endpoint.userregister.http.post");
+    sdc.timing("POST register user request timing "+timer);
 
     const userData = {
         firstname: req.body.firstname,
@@ -55,6 +57,7 @@ exports.register = (req,res) => {
                     let token = jwt.sign(user.dataValues, config.secret ,{expiresIn: 1440});
                     res.json( { token:token } )
                     logger.info("Created the User successfully");
+                    sdc.timing("QUERY register user request timing "+timer);
                 })
                 .catch(err => {
                     res.send('error: '+err);
@@ -75,7 +78,9 @@ exports.register = (req,res) => {
 //Login
 exports.login = (req,res) => {
 
+    var timer = new Date();
     sdc.increment("endpoint.userlogin.http.get");
+    sdc.timing("POST login request timming "+timer);
 
     User.findOne({
         where: {
@@ -89,7 +94,7 @@ exports.login = (req,res) => {
                 let token = jwt.sign(user.dataValues, config.secret , {expiresIn : 1440})
                 res.json({ token: token})
                 logger.info("User logged in successfully");
-
+                sdc.timing("QUERY login request timming "+timer);
             } else {
                 res.status(401).send({message : "Incorrect password"})
                 logger.error("Incorrect password");
@@ -106,7 +111,9 @@ exports.login = (req,res) => {
 exports.create = (req,res) => {
     
     //Validate request
+    var timer = new Date();
     sdc.increment("endpoint.createuser.http.post");
+    sdc.timing("POST create user request login "+timer);
 
     if (!req.body.firstname && !req.body.lastname && !req.body.email && !req.body.password) {
         res.status(400).send({
@@ -127,7 +134,7 @@ exports.create = (req,res) => {
     User.create(user)
         .then(data => {
             res.send(data);
-
+            sdc.timing("QUERY create user request login "+timer);
         })
         .catch(err => {
             res.status(500).send({
@@ -140,7 +147,9 @@ exports.create = (req,res) => {
 //Retrieve all users from the database
 exports.findAll = (req,res) => {
 
+    var timer = new Date();
     sdc.increment("endpoint.findallusers.http.post");
+    sdc.timing("GET retrieve all users request timming "+timer);
 
     const firstname = req.query.title;
     var condition = firstname ? { title: {[Op.like]: `%${title}%`}} : null;
@@ -148,6 +157,7 @@ exports.findAll = (req,res) => {
     User.findAll({ where: condition })
         .then(data => {
             res.send(data);
+            sdc.timing("QUERY retrieve all users request timming "+timer);
         })
         .catch(err => {
             res.status(500).send({
@@ -160,13 +170,16 @@ exports.findAll = (req,res) => {
 //Find a single User with an id
 exports.findOne = (req,res) => {
 
+    var timer = new Date();
     sdc.increment("endpoint.findoneuser.http.post");
+    sdc.timing("GET retrieve single user request timming "+timer);
 
     const id = req.params.id;
 
     User.findByPk(id)
         .then(data => {
             res.send(data);
+            sdc.timing("QUERY retrieve single user request timming "+timer);
         })
         .catch(err => {
             res.status(500).send({
@@ -177,6 +190,11 @@ exports.findOne = (req,res) => {
 
 
 exports.findOneEmail = (req,res) => {
+
+    var timer = new Date();
+    sdc.increment("endpoint.findoneuser.http.post");
+    sdc.timing("GET retrieve single user request timming "+timer);
+
     const email = req.body.email;
 
     User.findOne({
@@ -186,6 +204,7 @@ exports.findOneEmail = (req,res) => {
         })
         .then(data => {
             res.send(data);
+            sdc.timing("QUERY retrieve single user request timming "+timer);
         })
         .catch(err => {
             res.status(500).send({
@@ -196,6 +215,11 @@ exports.findOneEmail = (req,res) => {
 
 //Update an user by an id in the request
 exports.update = (req,res) => {
+
+    var timer = new Date();
+    sdc.increment("endpoint.updateuser.http.post");
+    sdc.timing("POST update user request timming "+timer);
+
     const id = req.params.id;
 
     if(!schema.validate(req.body.password)){
@@ -221,6 +245,7 @@ exports.update = (req,res) => {
                 res.send({
                     message: "User was updated successfully."
                 });
+                sdc.timing("QUERY update user request timming "+timer);
             } else {
                 res.send({
                     message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty`
@@ -238,6 +263,10 @@ exports.update = (req,res) => {
 exports.profile = (req,res) => {
     var decoded = jwt.verify(req.headers['Authorization'], config.secret);
 
+    var timer = new Date();
+    sdc.increment("endpoint.findoneuserprofile.http.post");
+    sdc.timing("GET retrieve single user profile request timming "+timer);
+
     User.findOne({
         where:{
             id: decoded.id
@@ -249,10 +278,10 @@ exports.profile = (req,res) => {
             }else{
                 res.status(500).send("User does not exist")
                 logger.error("User does not exist when searching for the respective profile");
+                sdc.timing("QUERY retrieve single user profile request timming "+timer);
             }
         })
         .catch(err => {
             res.status(500).send('error: '+err)
         })
 }
-
