@@ -15,7 +15,7 @@ api
 client
 config
 controllers
-middlewares
+middlewaress
 models
 ```
 
