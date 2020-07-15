@@ -4,8 +4,16 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const request = require("request");
+const publicIp = require('public-ip');
 
 //const ipaddress = process.env.IP_ADDRESS;
+const ip =(async () => {
+    console.log(await publicIp.v4());
+    //=> '46.5.21.123'
+ 
+    console.log(await publicIp.v6());
+    //=> 'fe80::200:f8ff:fe21:67cf'
+})();
 
 const cardRoutes = require('./api/routes/cards');
 const userRoutes = require('./api/routes/users');
@@ -18,7 +26,7 @@ const imageRoutes = require('./api/routes/image');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://ipaddress:3000"
+    origin: "http://"+ip+":3000"
 };
 
 app.use(cors(corsOptions));

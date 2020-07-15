@@ -118,7 +118,7 @@ class Seller extends Component {
     }
 
     validate = (e) => {
-        //const ipaddress = process.env.REACT_APP_IP_ADDRESS;
+        //const "+window.location.hostname+" = process.env.REACT_APP_IP_ADDRESS;
         const price = parseFloat(document.getElementById("price").value);
         const quantity = parseInt(document.getElementById("quantity").value);
         console.log("This is the quantity of the book");
@@ -183,7 +183,7 @@ class Seller extends Component {
                         let fileName = fileParts[0];
                         let fileType = fileParts[1];
                         console.log("Preparing the upload");
-                        ax.post("http://ipaddress:5000/image/sign_s3",{
+                        ax.post("http://"+window.location.hostname+":5000/image/sign_s3",{
                         fileName : fileName,
                         fileType : fileType
                         })
@@ -244,7 +244,7 @@ class Seller extends Component {
     }
 
     uploadImage = (e) => {
-        //const ipaddress = process.env.REACT_APP_IP_ADDRESS;
+        //const "+window.location.hostname+" = process.env.REACT_APP_IP_ADDRESS;
         const id = e.target.id;
         const isbnData = {};
         isbnData.isbn = document.getElementById("cisbn"+id).value;
@@ -281,7 +281,7 @@ class Seller extends Component {
                 let fileName = fileParts[0];
                 let fileType = fileParts[1];
                 console.log("Preparing the upload");
-                ax.post("http://ipaddress:5000/image/sign_s3",{
+                ax.post("http://"+window.location.hostname+":5000/image/sign_s3",{
                 fileName : fileName,
                 fileType : fileType
                 })
