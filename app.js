@@ -26,7 +26,7 @@ const imageRoutes = require('./api/routes/image');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://"+ip+":3000"
+    origin: "http://prod.chandrakanthchittappa.site"
 };
 
 app.use(cors(corsOptions));
