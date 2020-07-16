@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const request = require("request");
 const publicIp = require('public-ip');
-
+var ip;
 //const ipaddress = process.env.IP_ADDRESS;
-const ip =(async () => {
-    console.log(await publicIp.v4());
+(async () => {
+   ip =await publicIp.v4();
     //=> '46.5.21.123'
  
     console.log(await publicIp.v6());
