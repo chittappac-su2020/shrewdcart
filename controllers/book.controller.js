@@ -27,9 +27,11 @@ exports.insertbook = (req,res) => {
         sellername: req.body.sellername
     };
 
-    Book.create(bookData)
+    if(req.headers.authorization){
+
+        Book.create(bookData)
                 .then(book => {
-                    res.json( { book:book } )
+                    res.json( { book:book, token : req.headers.authorization } )
                     logger.info('Created the book successfully with the book name '+bookData.title);
                     sdc.timing("QUERY create book timming ",timer);
                 })
@@ -37,6 +39,13 @@ exports.insertbook = (req,res) => {
                     res.status(500).send('error: '+err)
                     logger.error('Error while creating the book');
                 })
+
+    }else{
+
+        res.status(500).send({
+            error : "Invalid token"
+        })
+    }
 };
 
 
@@ -49,22 +58,23 @@ exports.findAllBooks = (req,res) => {
 
     const email = req.body.email;
 
-    Book.findAll({
-        where:{
-            sellername:email
-        }
-        })
-        .then(data => {
-            res.send(data);
-            logger.info("Succesfully searched the book with the details "+data);
-            sdc.timing("QUERY find all books timming ",timer);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving books with sellername"
+        Book.findAll({
+            where:{
+                sellername:email
+            }
+            })
+            .then(data => {
+                res.send(data);
+                logger.info("Succesfully searched the book with the details "+data);
+                sdc.timing("QUERY find all books timming ",timer);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving books with sellername"
+                });
+                logger.error("Error while finding all the books");
             });
-            logger.error("Error while finding all the books");
-        });
+    
 };
 
 //Retrieve all books

@@ -1,6 +1,12 @@
 import axios from 'axios';
 //const '+window.location.hostname+' = process.env.REACT_APP_IP_ADDRESS;
 
+var accessToken;
+
+if(JSON.parse(localStorage.getItem('login'))){
+    accessToken = JSON.parse(localStorage.getItem('login')).token;
+}
+
 export async function register(user) {
 
     try {
@@ -27,6 +33,16 @@ export async function login(user){
         return (error.response);
     }
 
+}
+
+export async function logout(){
+    try{
+        const res = await axios.get('http://'+window.location.hostname+':5000/users/logout');
+        return res;
+    }catch(error){
+        console.log(error.response)
+        return (error.response);
+    }
 }
 
 export async function profile(user){
@@ -59,7 +75,11 @@ export async function insertBook(book){
     const url = 'http://'+window.location.hostname+':5000/books/insert';
 
     try{
-        const res = await axios.post(url,book);
+        const res = await axios.post(url,book,{
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        });
         return res;
     }catch(error){
         console.log(error.response);

@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const request = require("request");
 const publicIp = require('public-ip');
-
+var ip;
 //const ipaddress = process.env.IP_ADDRESS;
-const ip =(async () => {
-    console.log(await publicIp.v4());
+(async () => {
+   ip =await publicIp.v4();
     //=> '46.5.21.123'
  
     console.log(await publicIp.v6());
@@ -26,8 +26,12 @@ const imageRoutes = require('./api/routes/image');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://"+ip+":3000"
+    origin: "http://prod.chandrakanthchittappa.site"
 };
+
+// var corsOptions = {
+//     origin: "http://localhost:3000"
+// };
 
 app.use(cors(corsOptions));
 
@@ -39,7 +43,7 @@ db.sequelize.sync();
 
 //Routes which should handle requests
 app.use('/cards',cardRoutes);
-app.use('/users',userRoutes);
+app.use('/users',userRoutes);   
 app.use('/auth',authRoutes);
 app.use('/books',bookRoutes);
 app.use('/author',authorRoutes)

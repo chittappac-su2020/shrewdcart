@@ -285,3 +285,10 @@ exports.profile = (req,res) => {
             res.status(500).send('error: '+err)
         })
 }
+
+//Logout
+exports.logout = (req,res) => {
+    res.status(200).send({
+        "message":"User successfully logged out"
+    })
+}
