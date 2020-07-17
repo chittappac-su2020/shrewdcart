@@ -39,7 +39,7 @@ db.sequelize.sync();
 
 //Routes which should handle requests
 app.use('/cards',cardRoutes);
-app.use('/users',userRoutes);
+app.use('/users',userRoutes);   
 app.use('/auth',authRoutes);
 app.use('/books',bookRoutes);
 app.use('/author',authorRoutes)
