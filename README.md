@@ -1,5 +1,5 @@
 <h1 align="center">
-Webapp is the full stack implementation of Node.js, MySQL, Sequelize and React
+Webapp is the full stack implementation of Node.js, MySQL, Sequelize and React.
 </h1>
 
 ## clone or download
