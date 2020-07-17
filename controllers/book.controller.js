@@ -48,7 +48,8 @@ exports.findAllBooks = (req,res) => {
     sdc.timing("POST find all books by seller name timming ",timer);
 
     logger.info("This is sdnjsdjkns");
-    logger.info(req.headers);
+    logger.info("Logging the request headers here");
+    logger.info(JSON.stringify(req.headers));
 
     const email = req.body.email;
 
