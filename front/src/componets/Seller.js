@@ -147,6 +147,14 @@ class Seller extends Component {
         isbnData.isbn = bookData.isbn;
         console.log("This is isbn value");
         console.log(isbnData);
+
+        var accessToken;
+        if(JSON.parse(localStorage.getItem('login'))){
+            accessToken = JSON.parse(localStorage.getItem('login')).token;
+        }
+
+        bookData.token = accessToken;
+
         axios.insertBook(bookData).then((res) => {
             if(res.status === 200){
                 console.log(res);

@@ -1,7 +1,12 @@
 import axios from 'axios';
 //const '+window.location.hostname+' = process.env.REACT_APP_IP_ADDRESS;
 
-const accessToken = JSON.parse(localStorage.getItem('login')).token;
+var accessToken;
+
+if(JSON.parse(localStorage.getItem('login'))){
+    accessToken = JSON.parse(localStorage.getItem('login')).token;
+}
+
 
 axios.interceptors.request.use(
     config => {

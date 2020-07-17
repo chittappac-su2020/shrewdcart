@@ -29,6 +29,10 @@ var corsOptions = {
     origin: "http://prod.chandrakanthchittappa.site"
 };
 
+// var corsOptions = {
+//     origin: "http://localhost:3000"
+// };
+
 app.use(cors(corsOptions));
 
 app.use(morgan('dev'));
