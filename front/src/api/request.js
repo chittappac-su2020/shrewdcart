@@ -37,7 +37,7 @@ export async function login(user){
 
 export async function logout(){
     try{
-        const res = await axios.post('http://'+window.location.hostname+':5000/users/logout',user);
+        const res = await axios.post('http://'+window.location.hostname+':5000/users/logout');
         return res;
     }catch(error){
         console.log(error.response)
