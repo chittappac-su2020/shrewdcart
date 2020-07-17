@@ -9,6 +9,10 @@ hooks:
   ApplcationStop:
     - location: ./codedeploy_scripts/applicationStop.sh
       timeout: 1200
+  
+  BeforeInstall:
+    - location: ./codedeploy_scripts/beforeInstall.sh
+      timeout: 1200
 
   AfterInstall:
     - location: ./codedeploy_scripts/afterInstall.sh
