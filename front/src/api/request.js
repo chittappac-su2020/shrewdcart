@@ -7,14 +7,6 @@ if(JSON.parse(localStorage.getItem('login'))){
     accessToken = JSON.parse(localStorage.getItem('login')).token;
 }
 
-
-axios.interceptors.request.use(
-    config => {
-        config.headers.authorization = `Bearer ${accessToken}`;
-        return config;
-    }
-)
-
 export async function register(user) {
 
     try {
