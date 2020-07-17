@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import * as axios from '../api/request';
 
 class Logout extends Component {
+
+    constructor(){
+        super();
+        axios.logout().then((res) => {
+            console.log(res);
+        })
+    }
 
     componentDidMount(){
         localStorage.setItem('login',JSON.stringify({
