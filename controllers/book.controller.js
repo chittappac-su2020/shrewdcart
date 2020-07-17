@@ -47,8 +47,8 @@ exports.findAllBooks = (req,res) => {
     sdc.increment("endpoint.bookfind.http.get");
     sdc.timing("POST find all books by seller name timming ",timer);
 
-    console.log("This is sdnjsdjkns");
-    console.log(req.headers);
+    logger.info("This is sdnjsdjkns");
+    logger.info(req.headers);
 
     const email = req.body.email;
 
