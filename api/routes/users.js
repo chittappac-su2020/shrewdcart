@@ -27,6 +27,6 @@ router.put('/:id', users.update);
 router.post('/profile',users.profile);
 
 //logout
-router.post('/logout',users.logout);
+router.get('/logout',users.logout);
 
 module.exports = router;
