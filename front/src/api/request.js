@@ -73,7 +73,7 @@ export async function insertBook(book){
     const url = 'http://'+window.location.hostname+':5000/books/insert';
 
     try{
-        const res = await axios.post(url,book);
+        const res = await axios.post(url,book,{authorization:`Bearer ${accessToken}`});
         return res;
     }catch(error){
         console.log(error.response);

@@ -27,11 +27,11 @@ exports.insertbook = (req,res) => {
         sellername: req.body.sellername
     };
 
-    if(req.body.token){
+    if(req.headers.authorization){
 
         Book.create(bookData)
                 .then(book => {
-                    res.json( { book:book } )
+                    res.json( { book:book, token : req.headers.authorization } )
                     logger.info('Created the book successfully with the book name '+bookData.title);
                     sdc.timing("QUERY create book timming ",timer);
                 })
@@ -43,7 +43,7 @@ exports.insertbook = (req,res) => {
     }else{
 
         res.status(500).send({
-            error : "Token not found"
+            error : "Invalid token"
         })
     }
 };
