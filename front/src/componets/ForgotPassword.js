@@ -4,6 +4,12 @@ import * as axios from '../api/request';
 class ForgotPassword extends Component {
 
     reset = (e) => {
+        let body = {}
+        body.email = document.getElementById("email").value;
+
+        console.log("This is the email");
+        console.log(body.email);
+
         axios.resetPassword().then((res) => {
             console.log("This is the response of reset password");
             console.log(res);
