@@ -349,6 +349,18 @@ export async function delImageFromS3(img){
 }
 
 
+export async function resetPassword(body){
+    const url = 'http://'+window.location.hostname+':5000/service';
+
+    try{
+        const res = await axios.post(url,body);
+        return res;
+    }catch(error){
+        console.log(error.response);
+        return (error.response);
+    }
+}
+
 
 
 

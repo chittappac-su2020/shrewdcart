@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import Seller from './Seller'
 import * as axios from '../api/request';
+import ForgotPassword from '../componets/ForgotPassword';
+import { Route, Switch } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -114,6 +116,10 @@ class Login extends Component {
 
     }
 
+    reset = (e) => {
+
+    }
+
     render() {
 
         return(
@@ -129,6 +135,8 @@ class Login extends Component {
                     <label for="password">Passsword:    </label>
                     <input type="password" id="password" name="password"></input><br></br>
                     <input type="button" onClick={(e)=>{this.login(e)}}  value="Login"></input>
+                    
+                    <Nav.Link href="/resetpassword">Forgot password?</Nav.Link><br/><br/>
                     </form>
                     </div>
                     :

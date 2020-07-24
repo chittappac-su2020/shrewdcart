@@ -22,6 +22,7 @@ const bookRoutes = require('./api/routes/books');
 const authorRoutes = require('./api/routes/author');
 const cartRoutes = require('./api/routes/cart');
 const imageRoutes = require('./api/routes/image');
+const serviceRoutes = require('./api/routes/service');
 
 const db = require("./models");
 
@@ -49,6 +50,7 @@ app.use('/books',bookRoutes);
 app.use('/author',authorRoutes)
 app.use('/cart',cartRoutes)
 app.use('/image',imageRoutes);
+app.use('/service',serviceRoutes);
 
 //Handling all other requests
 app.use((req, res, next) => {
