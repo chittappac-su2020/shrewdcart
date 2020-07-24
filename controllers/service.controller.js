@@ -18,6 +18,8 @@ var sqs = new aws.SQS({apiVersion: '2012-11-05'});
 
 exports.resetPassword = (req,res) => {
 
+    const id = uuidv4();
+
     var email = req.body.email;
 
     let payload = {
@@ -28,7 +30,8 @@ exports.resetPassword = (req,res) => {
 
     let params = {
         Message : email,
-        TopicArn : process.env.TopicArn
+        TopicArn : process.env.TopicArn,
+        id : id
     }
 
     sns.publish(params, (err,data) => {
