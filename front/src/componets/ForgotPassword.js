@@ -10,7 +10,7 @@ class ForgotPassword extends Component {
         console.log("This is the email");
         console.log(body.email);
 
-        axios.resetPassword().then((res) => {
+        axios.resetPassword(body).then((res) => {
             console.log("This is the response of reset password");
             console.log(res);
         })
