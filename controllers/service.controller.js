@@ -35,7 +35,7 @@ exports.resetPassword = (req,res) => {
         if(err){
             logger.error("Email for ::"+email+"was not successfull ::"+err);
             res.status(501).send({
-                message : "Error in sending the email " + err
+                message : "Error in sending the email " + err + process.env.TopicArn
             })
         }else{
             logger.error("Email for ::"+email+"sent successfully");
