@@ -11,7 +11,7 @@ const logger = require("../config/winston-logger");
 const statsDClient = require('statsd-client');
 const sdc=new statsDClient({ host: 'localhost', port: 8125});
 const aws = require('aws-sdk');
-const uuidv4 = require('uuid/v4');
+
 
 var sns = new aws.SNS({});
 var sqs = new aws.SQS({apiVersion: '2012-11-05'});
@@ -19,12 +19,6 @@ var sqs = new aws.SQS({apiVersion: '2012-11-05'});
 exports.resetPassword = (req,res) => {
 
     var email = req.body.email;
-
-    let payload = {
-            Email : email
-    }
-
-    payload = JSON.stringify(payload);
 
     let params = {
         Message : email,
