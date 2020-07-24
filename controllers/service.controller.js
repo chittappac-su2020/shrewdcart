@@ -18,8 +18,6 @@ var sqs = new aws.SQS({apiVersion: '2012-11-05'});
 
 exports.resetPassword = (req,res) => {
 
-    const id = uuidv4();
-
     var email = req.body.email;
 
     let payload = {
@@ -30,20 +28,19 @@ exports.resetPassword = (req,res) => {
 
     let params = {
         Message : email,
-        TopicArn : process.env.TopicArn,
-        id : id
+        TopicArn : process.env.TopicArn
     }
 
     sns.publish(params, (err,data) => {
         if(err){
             logger.error("Email for ::"+email+"was not successfull ::"+err);
             res.status(501).send({
-                message : "Error in sending the email " + err + process.env.TopicArn
+                message : "Error in sending the email " + err 
             })
         }else{
             logger.error("Email for ::"+email+"sent successfully");
             res.status(200).send({
-                message : "Email sent successfully"
+                message : "Email sent successfully " + params.Message
             })
         }
     }) 
