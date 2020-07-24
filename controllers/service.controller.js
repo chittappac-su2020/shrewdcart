@@ -27,7 +27,7 @@ exports.resetPassword = (req,res) => {
     payload = JSON.stringify(payload);
 
     let params = {
-        Message : payload,
+        Message : email,
         TopicArn : process.env.TopicArn
     }
 
