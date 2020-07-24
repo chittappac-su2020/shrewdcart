@@ -23,7 +23,7 @@ exports.resetPassword = (req,res) => {
 
     var id = uuidv4();
 
-    let link =  'http://prod.chandrakanthchittappa.site/reset'+id
+    let link =  'http://prod.chandrakanthchittappa.site/token='+id
 
     let payload = {
             Email : email,
@@ -51,3 +51,4 @@ exports.resetPassword = (req,res) => {
         }
     }) 
 }
+
