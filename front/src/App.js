@@ -13,7 +13,7 @@ import Logout from '../src/componets/Logout';
 import Seller from '../src/componets/Seller';
 import Buyer from '../src/componets/Buyer';
 import Cart from '../src/componets/Cart';
-
+import ForgotPassword from '../src/componets/ForgotPassword';
 class App extends Component{
 
   render(){
@@ -55,6 +55,7 @@ class App extends Component{
           <Route path="/sell" component={Seller} />
           <Route path="/buy" component={Buyer} />
           <Route path="/cart" component={Cart} />
+          <Route path="/resetpassword" component={ForgotPassword} />
         </Switch>
 
     </div>
