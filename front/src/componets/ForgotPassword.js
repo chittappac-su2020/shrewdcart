@@ -11,6 +11,11 @@ class ForgotPassword extends Component {
         console.log(body.email);
 
         axios.resetPassword(body).then((res) => {
+
+            if(res.status === 404){
+                alert("Email not registered");
+            }
+
             console.log("This is the response of reset password");
             console.log(res);
         })
