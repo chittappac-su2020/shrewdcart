@@ -27,7 +27,7 @@ const serviceRoutes = require('./api/routes/service');
 const db = require("./models");
 
 var corsOptions = {
-    origin: "http://prod.chandrakanthchittappa.site"
+    origin: "https://prod.chandrakanthchittappa.site"
 };
 
 // var corsOptions = {

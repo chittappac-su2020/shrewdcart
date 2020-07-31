@@ -33,9 +33,9 @@ exports.resetPassword = (req,res) => {
             res.status(200).send({
                 user : user
             })
-            var id = uuidv4();
+                    var id = uuidv4();
 
-                    let link =  'http://prod.chandrakanthchittappa.site/token='+id
+                    let link =  'https://prod.chandrakanthchittappa.site/token='+id
 
                     let payload = {
                             Email : email,

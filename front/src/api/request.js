@@ -10,7 +10,7 @@ if(JSON.parse(localStorage.getItem('login'))){
 export async function register(user) {
 
     try {
-        const res = await axios.post('http://'+window.location.hostname+':5000/users/register',user);
+        const res = await axios.post('https://'+window.location.hostname+':5000/users/register',user);
         console.log('after post request');
         alert("User registered successfully!")
         return res;
@@ -25,7 +25,7 @@ export async function login(user){
     console.log("Came to thisssss block")
     try{
 
-        const res = await axios.post('http://'+window.location.hostname+':5000/users/login',user);
+        const res = await axios.post('https://'+window.location.hostname+':5000/users/login',user);
         console.log('after login request');
         return res;
     }catch(error){
@@ -37,7 +37,7 @@ export async function login(user){
 
 export async function logout(){
     try{
-        const res = await axios.get('http://'+window.location.hostname+':5000/users/logout');
+        const res = await axios.get('https://'+window.location.hostname+':5000/users/logout');
         return res;
     }catch(error){
         console.log(error.response)
@@ -48,7 +48,7 @@ export async function logout(){
 export async function profile(user){
 
     try{
-        const res = await axios.post('http://'+window.location.hostname+':5000/users/find',user);
+        const res = await axios.post('https://'+window.location.hostname+':5000/users/find',user);
         console.log('after profile request');
         return res;
     }catch(error){
@@ -59,7 +59,7 @@ export async function profile(user){
 
 export async function update(user){
 
-    const url = 'http://'+window.location.hostname+':5000/users/'+user.id;
+    const url = 'https://'+window.location.hostname+':5000/users/'+user.id;
 
     try{
         const res = await axios.put(url,user);
@@ -72,7 +72,7 @@ export async function update(user){
 
 export async function insertBook(book){
 
-    const url = 'http://'+window.location.hostname+':5000/books/insert';
+    const url = 'https://'+window.location.hostname+':5000/books/insert';
 
     try{
         const res = await axios.post(url,book,{
@@ -90,7 +90,7 @@ export async function insertBook(book){
 
 export async function getSellerBooks(book){
 
-    const url = 'http://'+window.location.hostname+':5000/books/findbooks';
+    const url = 'https://'+window.location.hostname+':5000/books/findbooks';
 
     try{
         const res = await axios.post(url,book);
@@ -104,7 +104,7 @@ export async function getSellerBooks(book){
 
 export async function getOSellerBooks(book){
 
-    const url = 'http://'+window.location.hostname+':5000/books/othersellerlisting';
+    const url = 'https://'+window.location.hostname+':5000/books/othersellerlisting';
 
     try{
         const res = await axios.post(url,book);
@@ -118,7 +118,7 @@ export async function getOSellerBooks(book){
 
 export async function updateBook(book){
 
-    const url = 'http://'+window.location.hostname+':5000/books/update';
+    const url = 'https://'+window.location.hostname+':5000/books/update';
 
     try{
         const res = await axios.post(url,book);
@@ -132,7 +132,7 @@ export async function updateBook(book){
 
 export async function deleteBook(book){
 
-    const url = 'http://'+window.location.hostname+':5000/books/delete';
+    const url = 'https://'+window.location.hostname+':5000/books/delete';
 
     try{
         const res = await axios.post(url,book);
@@ -146,7 +146,7 @@ export async function deleteBook(book){
 
 export async function findAllBooks(){
 
-    const url = 'http://'+window.location.hostname+':5000/books/findall';
+    const url = 'https://'+window.location.hostname+':5000/books/findall';
 
     try{
         const res = await axios.post(url);
@@ -160,7 +160,7 @@ export async function findAllBooks(){
 
 export async function insertCart(cartData){
 
-    const url = 'http://'+window.location.hostname+':5000/cart/insert';
+    const url = 'https://'+window.location.hostname+':5000/cart/insert';
 
     try{
         const res = await axios.post(url,cartData);
@@ -174,7 +174,7 @@ export async function insertCart(cartData){
 
 export async function getCart(){
 
-    const url = 'http://'+window.location.hostname+':5000/cart/findall';
+    const url = 'https://'+window.location.hostname+':5000/cart/findall';
 
     try{
         const res = await axios.post(url);
@@ -188,7 +188,7 @@ export async function getCart(){
 
 export async function findCart(cartData){
 
-    const url = 'http://'+window.location.hostname+':5000/cart/findone';
+    const url = 'https://'+window.location.hostname+':5000/cart/findone';
 
     try{
         const res = await axios.post(url,cartData);
@@ -202,7 +202,7 @@ export async function findCart(cartData){
 
 export async function updateCart(cartData){
 
-    const url = 'http://'+window.location.hostname+':5000/cart/update';
+    const url = 'https://'+window.location.hostname+':5000/cart/update';
 
     try{
         const res = await axios.post(url,cartData);
@@ -217,7 +217,7 @@ export async function updateCart(cartData){
 
 export async function findBoookByIsbn(isbn){
 
-    const url = 'http://'+window.location.hostname+':5000/books/isbn';
+    const url = 'https://'+window.location.hostname+':5000/books/isbn';
 
     try{
         const res = await axios.post(url,isbn);
@@ -233,7 +233,7 @@ export async function findBoookByIsbn(isbn){
 
 export async function insertAuthor(authorData){
 
-    const url = 'http://'+window.location.hostname+':5000/author/insert';
+    const url = 'https://'+window.location.hostname+':5000/author/insert';
 
     try{
         const res = await axios.post(url,authorData);
@@ -247,7 +247,7 @@ export async function insertAuthor(authorData){
 
 export async function findAllAuthors(){
 
-    const url = 'http://'+window.location.hostname+':5000/author/findall';
+    const url = 'https://'+window.location.hostname+':5000/author/findall';
 
     try{
         const res = await axios.post(url);
@@ -261,7 +261,7 @@ export async function findAllAuthors(){
 
 export async function deleteCart(cart){
 
-    const url = 'http://'+window.location.hostname+':5000/cart/delete';
+    const url = 'https://'+window.location.hostname+':5000/cart/delete';
 
     try{
         const res = await axios.post(url,cart);
@@ -274,7 +274,7 @@ export async function deleteCart(cart){
 }
 
 export async function insertImage(img){
-    const url = 'http://'+window.location.hostname+':5000/image/insert';
+    const url = 'https://'+window.location.hostname+':5000/image/insert';
 
     try{
         const res = await axios.post(url,img);
@@ -287,7 +287,7 @@ export async function insertImage(img){
 }
 
 export async function findImage(img){
-    const url = 'http://'+window.location.hostname+':5000/image/find';
+    const url = 'https://'+window.location.hostname+':5000/image/find';
 
     try{
         const res = await axios.post(url,img);
@@ -300,7 +300,7 @@ export async function findImage(img){
 
 //Finding all images
 export async function findAllImage(img){
-    const url = 'http://'+window.location.hostname+':5000/image/find';
+    const url = 'https://'+window.location.hostname+':5000/image/find';
 
     try{
         const res = await axios.post(url);
@@ -312,7 +312,7 @@ export async function findAllImage(img){
 }
 //Downloading the image
 export async function downloadImage(img){
-    const url = 'http://'+window.location.hostname+':5000/image/download';
+    const url = 'https://'+window.location.hostname+':5000/image/download';
 
     try{
         const res = await axios.post(url,img);
@@ -325,7 +325,7 @@ export async function downloadImage(img){
 
 //Deleting the image here
 export async function delImage(img){
-    const url = 'http://'+window.location.hostname+':5000/image/delete';
+    const url = 'https://'+window.location.hostname+':5000/image/delete';
 
     try{
         const res = await axios.post(url,img);
@@ -337,7 +337,7 @@ export async function delImage(img){
 }
 
 export async function delImageFromS3(img){
-    const url = 'http://'+window.location.hostname+':5000/image/deletefroms3';
+    const url = 'https://'+window.location.hostname+':5000/image/deletefroms3';
 
     try{
         const res = await axios.post(url,img);
@@ -350,7 +350,7 @@ export async function delImageFromS3(img){
 
 
 export async function resetPassword(body){
-    const url = 'http://'+window.location.hostname+':5000/service';
+    const url = 'https://'+window.location.hostname+':5000/service';
 
     try{
         const res = await axios.post(url,body);
