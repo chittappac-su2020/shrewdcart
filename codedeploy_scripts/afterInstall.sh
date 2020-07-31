@@ -5,6 +5,8 @@ sudo rm  /var/lib/apt/lists/lock
 sudo killall lock-frontend
 sudo rm  /var/lib/apt/lists/lock
 sudo killall lock-frontend
+sudo rm  /var/lib/dpkg/lock
+sudo rm  /var/lib/dpkg/lock-frontend
 cd /
 sudo chmod 757 userdata.txt
 sudo cp userdata.txt /home/ubuntu
